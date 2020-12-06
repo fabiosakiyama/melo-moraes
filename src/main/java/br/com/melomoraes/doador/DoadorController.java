@@ -16,19 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.melomoraes.client.GoogleClient;
+
 @RestController
 @RequestMapping("/doadores")
 public class DoadorController {
 	
 	private DoadorRepository repository;
 	
-	public DoadorController(DoadorRepository repository) {
+	private GoogleClient googleClient;
+	
+	public DoadorController(DoadorRepository repository, GoogleClient googleClient) {
 		this.repository = repository;
+		this.googleClient = googleClient;
 	}
 
 	@PostMapping
 	public void criaDoador(@Valid @RequestBody NovoDoadorRequest request) {
-		repository.save(request.toModel());
+		String placeId = googleClient.buscaPlaceIdDeUmEndereco(request.getEndereco().toGoogleString());
+		repository.save(request.toModel(placeId));
 	}
 	
 	@GetMapping
@@ -36,7 +42,7 @@ public class DoadorController {
 			@RequestParam(required = false) String nome, 
 			@RequestParam(required = false) String bairro, 
 			Pageable pageable) {
-		Endereco endereco = new Endereco(null, bairro, null);
+		Endereco endereco = new Endereco(null, bairro, null, null);
 		Doador doador = new Doador(nome, null, endereco);                         
 		Example<Doador> example = Example.of(doador);
 		Page<Doador> page = repository.findAll(example, pageable);

@@ -15,9 +15,14 @@ public class NovoEnderecoRequest {
 	
 	@NotBlank
 	private String numero;
-
-	public Endereco toModel() {
-		return new Endereco(rua, bairro, numero);
+	
+	public Endereco toModel(String placeId) {
+		return new Endereco(rua, bairro, numero, placeId);
+	}
+	
+	public String toGoogleString() {
+		return this.rua + ", " + this.numero + ", " + this.bairro + ", Pindamonhangaba";
 	}
 
+	
 }

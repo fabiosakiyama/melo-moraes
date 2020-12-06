@@ -7,3 +7,8 @@ spring:
     jpa:
         hibernate:
             ddl-auto: update
+            
+google:
+    key: ${GOOGLEKEY}
+    geocode-url: https://maps.googleapis.com/maps/api/geocode/json
+        
