@@ -3,6 +3,7 @@ package br.com.melomoraes.client;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -31,6 +32,8 @@ public class GoogleClient {
 		        .build();
 		
 		ResponseEntity<GoogleGeocodeResponse> response = template.getForEntity(builder.toString(), GoogleGeocodeResponse.class);
+		Assert.notEmpty(response.getBody().getResults(), "Nenhum resultado encontrado para o endereco " + endereco);
+		Assert.isTrue(response.getBody().getResults().size() > 1, "Mais de um resultado encontrado para o endereco " + endereco + ", tente informar um endereço mais específico" );
 		
 		return response.getBody().getResults().get(0).getPlace_id();
 	}

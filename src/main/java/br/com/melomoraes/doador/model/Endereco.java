@@ -1,4 +1,4 @@
-package br.com.melomoraes.doador;
+package br.com.melomoraes.doador.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -22,6 +22,8 @@ public class Endereco {
 	@Column(nullable = false)
 	private String numero;
 	
+	private String complemento;
+	
 	@NotBlank
 	@Column(nullable = false, unique = true)
 	private String placeId;
@@ -30,9 +32,14 @@ public class Endereco {
 	public Endereco() {}
 
 	public Endereco(String rua, String bairro, String numero, String placeId) {
+		this(rua, bairro, numero, placeId, null);
+	}
+	
+	public Endereco(String rua, String bairro, String numero, String placeId, String complemento) {
 		this.rua = rua;
 		this.bairro = bairro;
 		this.numero = numero;
 		this.placeId = placeId;
+		this.complemento = complemento;
 	}
 }

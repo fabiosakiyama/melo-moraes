@@ -1,11 +1,14 @@
-package br.com.melomoraes.doador;
+package br.com.melomoraes.doador.model;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 import lombok.Getter;
 
@@ -22,20 +25,24 @@ public class Doador {
 	
 	private String contato;
 	
+	@Positive
+	private Double quantidade;
+	
+	@Max(4)
+	@Min(1)
+	private Integer semana;
+	
 	@Embedded
 	private Endereco endereco;
 	
 	@Deprecated
 	public Doador() {}
 
-	public Doador(String nome, String contato, Endereco endereco) {
+	public Doador(String nome, String contato, Double quantidade, Integer semana, Endereco endereco) {
 		this.nome = nome;
 		this.contato = contato;
-		this.endereco = endereco;
-	}
-	
-	public Doador(String nome, Endereco endereco) {
-		this.nome = nome;
+		this.quantidade = quantidade;
+		this.semana = semana;
 		this.endereco = endereco;
 	}
 }
