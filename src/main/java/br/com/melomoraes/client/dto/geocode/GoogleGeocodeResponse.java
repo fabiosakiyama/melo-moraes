@@ -1,4 +1,4 @@
-package br.com.melomoraes.client.dto;
+package br.com.melomoraes.client.dto.geocode;
 
 import java.util.List;
 

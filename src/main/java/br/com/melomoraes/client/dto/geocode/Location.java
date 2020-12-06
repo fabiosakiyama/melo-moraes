@@ -1,4 +1,4 @@
-package br.com.melomoraes.client.dto;
+package br.com.melomoraes.client.dto.geocode;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

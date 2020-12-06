@@ -11,4 +11,8 @@ spring:
 google:
     key: ${GOOGLEKEY}
     geocode-url: https://maps.googleapis.com/maps/api/geocode/json
+    direction-url: https://maps.googleapis.com/maps/api/directions/json
+    maps-url: https://www.google.com/maps/dir/
+    origin: ChIJ2_2GVtjvzJQRuGJfRNGhwis
+    destination: ChIJ2_2GVtjvzJQRuGJfRNGhwis
         
