@@ -10,8 +10,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,13 +67,11 @@ public class DoadorController {
 	public ResponseEntity<List<DoadorResponse>> listaDoadores(
 			@RequestParam(required = false) String nome, 
 			@RequestParam(required = false) String bairro, 
-			@RequestParam(required = false) Integer semana, 
-			Pageable pageable) {
+			@RequestParam(required = false) Integer semana) {
 		Endereco endereco = new Endereco(null, bairro, null, null);
 		Doador doador = new Doador(nome, null, null, semana, endereco);                         
 		Example<Doador> example = Example.of(doador);
-		Page<Doador> page = repository.findAll(example, pageable);
-		List<Doador> doadores = page.getContent();
+		List<Doador> doadores = repository.findAll(example);
 		List<DoadorResponse> doadoresResponse = new ArrayList<>();
 		doadores.forEach(d -> doadoresResponse.add(new DoadorResponse(d)));
 		return ResponseEntity.ok(doadoresResponse);
