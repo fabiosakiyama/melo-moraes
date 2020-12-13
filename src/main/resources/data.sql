@@ -1,3 +1,4 @@
+-- Doadores Parque São Domingos
 INSERT INTO DOADOR (nome, contato, quantidade, semana, rua, bairro, numero, place_id) VALUES ('Fulano', null, 1, 1, 'R. Governador Pedro de Toledo', 'Parque São Domingos', '105', 'ChIJl2wcXxzwzJQRRd0XR8fZioo')
 INSERT INTO DOADOR (nome, contato, quantidade, semana, rua, bairro, numero, place_id) VALUES ('Ciclano', null, 2, 1, 'R. Capitão Vitório Basso', 'Parque São Domingos', '648', 'ChIJJ4bxohvwzJQRgZgDHCUI7KI')
 INSERT INTO DOADOR (nome, contato, quantidade, semana, rua, bairro, numero, place_id) VALUES ('Beltrano', null, 0.25, 1, 'R. Eduardo Prates da Fonseca', 'Parque São Domingos', '1165', 'ChIJsb-zpgLwzJQRfH2eSiTrvII')
@@ -6,3 +7,4 @@ INSERT INTO DOADOR (nome, contato, quantidade, semana, rua, bairro, numero, plac
 INSERT INTO DOADOR (nome, contato, quantidade, semana, rua, bairro, numero, place_id) VALUES ('NomeTeste', null, 1.25, 1, 'R. Eduardo Prates da Fonseca', 'Parque São Domingos', '755', 'ChIJv0R04xzwzJQRNKLTQfxnhog')
 INSERT INTO DOADOR (nome, contato, quantidade, semana, rua, bairro, numero, place_id) VALUES ('UmaPessoa', null, 1.5, 1, 'R. Eduardo Prates da Fonseca', 'Parque São Domingos', '387', 'ElBSdWEgRWR1YXJkbyBQcmF0ZXMgZGEgRm9uc2VjYSwgMzg3IC0gU8OjbyBCZW5lZGl0bywgUGluZGFtb25oYW5nYWJhIC0gU1AsIEJyYXppbCIbEhkKFAoSCfkEGugb8MyUEYxePwOv-3iOEIMD')
 INSERT INTO DOADOR (nome, contato, quantidade, semana, rua, bairro, numero, place_id) VALUES ('Fabio', null, 1.75, 1, 'R. Eng. Orlando Drumond Murgel', 'Parque São Domingos', '10', 'ElBSLiBFbmcuIE9ybGFuZG8gRHJ1bW9uZCBNdXJnZWwsIDEwIC0gU8OjbyBCZW5lZGl0bywgUGluZGFtb25oYW5nYWJhIC0gU1AsIEJyYXppbCIaEhgKFAoSCV9c5v4c8MyUEcxGXmeF_L8REAo')
+

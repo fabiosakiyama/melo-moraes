@@ -19,8 +19,10 @@ public class NovoEnderecoRequest {
 	
 	private String complemento;
 	
+	private String obs;
+	
 	public Endereco toModel(String placeId) {
-		return new Endereco(rua, bairro, numero, placeId, complemento);
+		return new Endereco(rua, bairro, numero, placeId, complemento, obs);
 	}
 	
 	public String toGoogleString() {

@@ -28,18 +28,21 @@ public class Endereco {
 	@Column(nullable = false, unique = true)
 	private String placeId;
 	
+	private String obs;
+	
 	@Deprecated
 	public Endereco() {}
 
 	public Endereco(String rua, String bairro, String numero, String placeId) {
-		this(rua, bairro, numero, placeId, null);
+		this(rua, bairro, numero, placeId, null, null);
 	}
 	
-	public Endereco(String rua, String bairro, String numero, String placeId, String complemento) {
+	public Endereco(String rua, String bairro, String numero, String placeId, String complemento, String obs) {
 		this.rua = rua;
 		this.bairro = bairro;
 		this.numero = numero;
 		this.placeId = placeId;
 		this.complemento = complemento;
+		this.obs = obs;
 	}
 }

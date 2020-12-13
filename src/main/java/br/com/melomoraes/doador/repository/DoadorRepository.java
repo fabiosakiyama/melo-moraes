@@ -10,6 +10,6 @@ import br.com.melomoraes.doador.model.Doador;
 @Repository
 public interface DoadorRepository extends JpaRepository<Doador, Long> {
 
-	List<Doador> findBySemana(int semana);
+	List<Doador> findBySemanaInAndEndereco_BairroIn(List<Integer> semanas, List<String> bairros);
 
 }

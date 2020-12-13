@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 public class DoadorResponse {
 	
+	private Long id;
+	
 	private String nome;
 	
 	private String contato;
@@ -17,6 +19,7 @@ public class DoadorResponse {
 	private EnderecoResponse endereco;
 
 	public DoadorResponse(Doador doador) {
+		this.id = doador.getId();
 		this.nome = doador.getNome();
 		this.contato = doador.getContato();
 		this.quantidade = doador.getQuantidade();

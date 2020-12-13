@@ -29,8 +29,11 @@ public class DoacaoController {
 	}
 
 	@GetMapping("/semana")
-	public ResponseEntity<DoadoresSemanaResponse> doadoresDaSemana(@RequestParam int semana) {
-		List<Doador> doadoresDaSemana = doadorRepository.findBySemana(semana);
+	public ResponseEntity<DoadoresSemanaResponse> doadoresDaSemana(
+			@RequestParam List<Integer> semanas, 
+			@RequestParam(required = false) List<Integer> semanasPS, 
+			@RequestParam List<String> bairros) {
+		List<Doador> doadoresDaSemana = doadorRepository.findBySemanaInAndEndereco_BairroIn(semanas, bairros);
 		DoadoresSemanaResponse doadoresResponse = new DoadoresSemanaResponse();
 		List<String> waypointsId = new ArrayList<>();
 		doadoresDaSemana.forEach(d -> waypointsId.add(d.getEndereco().getPlaceId()));
