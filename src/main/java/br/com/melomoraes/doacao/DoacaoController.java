@@ -27,7 +27,7 @@ public class DoacaoController {
 		this.doadorRepository = doadorRepository;
 		this.client = client;
 	}
-
+	
 	@GetMapping("/semana")
 	public ResponseEntity<?> doadoresDaSemana(
 			@RequestParam List<Integer> semanas, 
@@ -38,6 +38,18 @@ public class DoacaoController {
 			return ResponseEntity.badRequest()
 					.body("Foram encontrados mais de 25 doadores com esses filtros, infelizmente a API do Google tem um limite de 25 rotas");
 		}
+		List<DoadorResponse> response = new ArrayList<>();
+		doadoresDaSemana.forEach(d -> response.add(new DoadorResponse(d)));
+		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping("/gera-rota")
+	public ResponseEntity<?> geraRota(@RequestParam List<Long> doadoresIds) {
+		if(doadoresIds.size() > 25) {
+			return ResponseEntity.badRequest()
+					.body("Mais de 25 ids foram informados, infelizmente a API do Google tem um limite de 25 rotas");
+		}
+		List<Doador> doadoresDaSemana = doadorRepository.findAllById(doadoresIds);
 		DoadoresSemanaResponse doadoresResponse = new DoadoresSemanaResponse();
 		List<String> waypointsId = new ArrayList<>();
 		doadoresDaSemana.forEach(d -> waypointsId.add(d.getEndereco().getPlaceId()));
