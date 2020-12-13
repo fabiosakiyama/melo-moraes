@@ -29,11 +29,15 @@ public class DoacaoController {
 	}
 
 	@GetMapping("/semana")
-	public ResponseEntity<DoadoresSemanaResponse> doadoresDaSemana(
+	public ResponseEntity<?> doadoresDaSemana(
 			@RequestParam List<Integer> semanas, 
 			@RequestParam(required = false) List<Integer> semanasPS, 
 			@RequestParam List<String> bairros) {
 		List<Doador> doadoresDaSemana = doadorRepository.findBySemanaInAndEndereco_BairroIn(semanas, bairros);
+		if(doadoresDaSemana.size() > 25) {
+			return ResponseEntity.badRequest()
+					.body("Foram encontrados mais de 25 doadores com esses filtros, infelizmente a API do Google tem um limite de 25 rotas");
+		}
 		DoadoresSemanaResponse doadoresResponse = new DoadoresSemanaResponse();
 		List<String> waypointsId = new ArrayList<>();
 		doadoresDaSemana.forEach(d -> waypointsId.add(d.getEndereco().getPlaceId()));
@@ -48,7 +52,10 @@ public class DoacaoController {
 			doadoresResponse.getRota().add(new DoadorResponse(doador));
 			placesIdOrdenados.add(doador.getEndereco().getPlaceId());
 		}
-		doadoresResponse.setGoogleMapsUrl(client.getMapsUrl(placesIdOrdenados));
+		if(doadoresDaSemana.size() <= 9) {
+			doadoresResponse.setGoogleMapsUrl(client.getMapsUrl(placesIdOrdenados));
+		}
+		doadoresResponse.setNumeroDoadores(doadoresDaSemana.size());
 		return ResponseEntity.ok(doadoresResponse);
 	}
 }

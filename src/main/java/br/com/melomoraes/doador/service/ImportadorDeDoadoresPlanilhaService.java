@@ -106,7 +106,7 @@ public class ImportadorDeDoadoresPlanilhaService {
 				placeId = client.buscaPlaceIdDeUmEndereco(rua + ", " + numero + ", " + bairro + ", Pindamonhangaba");
 			}
 			
-			Endereco endereco = new Endereco(rua, bairro, numero, placeId, complemento, obs);
+			Endereco endereco = new Endereco(rua, bairro, numero, placeId.trim(), complemento, obs);
 			Doador doador = new Doador(nome, contato, quantidade, semana, endereco);
 			repository.save(doador);
 			

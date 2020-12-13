@@ -13,4 +13,5 @@ public class DoadoresSemanaResponse {
 	
 	public String googleMapsUrl;
 	
+	public int numeroDoadores;
 }
