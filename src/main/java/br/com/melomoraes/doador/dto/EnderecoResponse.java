@@ -13,11 +13,14 @@ public class EnderecoResponse {
 	private String numero;
 	
 	private String complemento;
+	
+	private String obs;
 
 	public EnderecoResponse(Endereco endereco) {
 		this.rua = endereco.getRua();
 		this.bairro = endereco.getBairro();
 		this.numero = endereco.getNumero();
 		this.complemento = endereco.getComplemento();
+		this.obs = endereco.getObs();
 	}
 }
