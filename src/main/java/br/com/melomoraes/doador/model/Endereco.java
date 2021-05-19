@@ -25,7 +25,7 @@ public class Endereco {
 	private String complemento;
 	
 	@NotBlank
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String placeId;
 	
 	private String obs;
