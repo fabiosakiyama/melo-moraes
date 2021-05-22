@@ -64,7 +64,7 @@ public class DoacaoController {
 			doadoresResponse.getRota().add(new DoadorResponse(doador));
 			placesIdOrdenados.add(doador.getEndereco().getPlaceId());
 		}
-		if(doadoresDaSemana.size() <= 9) {
+		if(doadoresDaSemana.size() <= 25) {
 			doadoresResponse.setGoogleMapsUrl(client.getMapsUrl(placesIdOrdenados));
 		}
 		doadoresResponse.setNumeroDoadores(doadoresDaSemana.size());
