@@ -1,4 +1,4 @@
-package br.com.melomoraes.doacao;
+package br.com.melomoraes.rota;
 
 import java.util.ArrayList;
 import java.util.List;

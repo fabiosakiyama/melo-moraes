@@ -1,4 +1,4 @@
-package br.com.melomoraes.doacao;
+package br.com.melomoraes.rota;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,14 @@ import br.com.melomoraes.doador.model.Doador;
 import br.com.melomoraes.doador.repository.DoadorRepository;
 
 @RestController
-@RequestMapping("/doacoes")
-public class DoacaoController {
+@RequestMapping("/rota")
+public class RotaController {
 	
 	private DoadorRepository doadorRepository;
 	
 	private GoogleClient client;
 	
-	public DoacaoController(DoadorRepository doadorRepository, GoogleClient client) {
+	public RotaController(DoadorRepository doadorRepository, GoogleClient client) {
 		this.doadorRepository = doadorRepository;
 		this.client = client;
 	}
@@ -43,7 +43,7 @@ public class DoacaoController {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping("/gera-rota")
+	@GetMapping()
 	public ResponseEntity<?> geraRota(@RequestParam List<Long> doadoresIds) {
 		if(doadoresIds.size() > 25) {
 			return ResponseEntity.badRequest()
