@@ -95,6 +95,19 @@ public class GoogleClient {
 		        .build();
 		return builder.toString();
 	}
+	
+	public String getSplitMapsUrl(List<String> placesIdOrdenados, String midOrigin, String midDestination) {
+		UriComponents builder = UriComponentsBuilder.fromHttpUrl(googleMapsUrl)
+		        .queryParam("api", 1)
+		        .queryParam("origin", "Pindamonhangaba")
+		        .queryParam("origin_place_id", (midOrigin == null ? origin : midOrigin))
+		        .queryParam("destination", "Pindamonhangaba")
+		        .queryParam("destination_place_id", (midDestination == null ? destination : midDestination))
+		        .queryParam("waypoints", generateWaypoint(placesIdOrdenados.size()))
+		        .queryParam("waypoint_place_ids", formatMapsWaypoints(placesIdOrdenados))
+		        .build();
+		return builder.toString();
+	}
 
 	private String formatMapsWaypoints(List<String> placesIdOrdenados) {
 		StringBuilder sb = new StringBuilder();

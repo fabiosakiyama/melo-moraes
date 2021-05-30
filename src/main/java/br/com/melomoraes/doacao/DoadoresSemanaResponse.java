@@ -11,7 +11,7 @@ public class DoadoresSemanaResponse {
 	
 	public List<DoadorResponse> rota = new ArrayList<>();
 	
-	public String googleMapsUrl;
+	public List<String> googleMapsUrls = new ArrayList<>();
 	
 	public int numeroDoadores;
 }

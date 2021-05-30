@@ -64,8 +64,40 @@ public class DoacaoController {
 			doadoresResponse.getRota().add(new DoadorResponse(doador));
 			placesIdOrdenados.add(doador.getEndereco().getPlaceId());
 		}
-		if(doadoresDaSemana.size() <= 25) {
-			doadoresResponse.setGoogleMapsUrl(client.getMapsUrl(placesIdOrdenados));
+		if(placesIdOrdenados.size() > 9) {
+			int count = 0;
+			List<String> splitPlacesIdOrdenados = new ArrayList<>();
+			String primeiroEnd = null;
+			String ultimoEnd = null;
+			for(String place : placesIdOrdenados) {
+				splitPlacesIdOrdenados.add(place);
+				count++;
+				if(count >= 8) {
+					if(doadoresResponse.getGoogleMapsUrls().isEmpty()) {
+						ultimoEnd = splitPlacesIdOrdenados.get(splitPlacesIdOrdenados.size() - 1);
+						splitPlacesIdOrdenados.remove(splitPlacesIdOrdenados.size() - 1);
+						doadoresResponse.getGoogleMapsUrls().add(client.getSplitMapsUrl(splitPlacesIdOrdenados, null, ultimoEnd));
+						primeiroEnd = ultimoEnd;
+					} else {
+						if(placesIdOrdenados.get(placesIdOrdenados.size() - 1) == place) {
+							doadoresResponse.getGoogleMapsUrls().add(client.getSplitMapsUrl(splitPlacesIdOrdenados, primeiroEnd, null));
+						} else {
+							ultimoEnd = splitPlacesIdOrdenados.get(splitPlacesIdOrdenados.size() - 1);
+							splitPlacesIdOrdenados.remove(splitPlacesIdOrdenados.size() - 1);
+							doadoresResponse.getGoogleMapsUrls().add(client.getSplitMapsUrl(splitPlacesIdOrdenados, primeiroEnd, ultimoEnd));
+							primeiroEnd = ultimoEnd;
+						}
+						
+					}
+					count = 0;
+					splitPlacesIdOrdenados.clear();
+				}
+			}
+			if(count > 0) {
+				doadoresResponse.getGoogleMapsUrls().add(client.getSplitMapsUrl(splitPlacesIdOrdenados, primeiroEnd, null));
+			}
+		} else {
+			doadoresResponse.getGoogleMapsUrls().add(client.getMapsUrl(placesIdOrdenados));
 		}
 		doadoresResponse.setNumeroDoadores(doadoresDaSemana.size());
 		return ResponseEntity.ok(doadoresResponse);
