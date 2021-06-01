@@ -16,6 +16,8 @@ public class DoadorResponse {
 	
 	private int semana;
 	
+	private boolean ativo;
+	
 	private EnderecoResponse endereco;
 
 	public DoadorResponse(Doador doador) {
@@ -24,6 +26,7 @@ public class DoadorResponse {
 		this.contato = doador.getContato();
 		this.quantidade = doador.getQuantidade();
 		this.semana = doador.getSemana();
+		this.ativo = doador.isAtivo();
 		this.endereco = new EnderecoResponse(doador.getEndereco());
 	}
 }

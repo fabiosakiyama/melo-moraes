@@ -81,6 +81,10 @@ public class ImportadorDeDoadoresPlanilhaService {
 		int rowIndex = 1;
 		for(int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++) {
 			Sheet sheet = workbook.getSheetAt(sheetIndex);
+			if(sheet.getSheetName().startsWith("_")) {
+				continue;
+			}
+			String area = sheet.getSheetName().split("-")[1].trim();
 			rowIndex = 1;
 			Row row = sheet.getRow(rowIndex);
 			String nome = row.getCell(0).getStringCellValue();
@@ -116,11 +120,11 @@ public class ImportadorDeDoadoresPlanilhaService {
 
 				if (!StringUtils.hasLength(placeId)) {
 					placeId = client
-							.buscaPlaceIdDeUmEndereco(rua + ", " + numero + ", " + bairro + ", Pindamonhangaba");
+							.buscaPlaceIdDeUmEndereco(rua + ", " + numero + ", " + bairro + ", Pindamonhangaba, Brazil");
 				}
 
-				Endereco endereco = new Endereco(rua, bairro, numero, placeId.trim(), complemento, obs);
-				Doador doador = new Doador(nome, contato, quantidade, semana, endereco);
+				Endereco endereco = new Endereco(rua, bairro, numero, placeId.trim(), complemento, obs, area);
+				Doador doador = new Doador(nome, contato, quantidade, semana, endereco, true);
 				repository.save(doador);
 
 				rowIndex++;

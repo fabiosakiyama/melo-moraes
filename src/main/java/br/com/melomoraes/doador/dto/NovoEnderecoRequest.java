@@ -21,11 +21,14 @@ public class NovoEnderecoRequest {
 	
 	private String obs;
 	
+	@NotBlank
+	private String area;
+	
 	public Endereco toModel(String placeId) {
-		return new Endereco(rua, bairro, numero, placeId, complemento, obs);
+		return new Endereco(rua, bairro, numero, placeId, complemento, obs, area);
 	}
 	
 	public String toGoogleString() {
-		return this.rua + ", " + this.numero + ", " + this.bairro + ", Pindamonhangaba";
+		return this.rua + ", " + this.numero + ", " + this.bairro + ", Pindamonhangaba, Brazil";
 	}
 }

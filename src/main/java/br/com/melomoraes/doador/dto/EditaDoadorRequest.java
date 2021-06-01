@@ -13,7 +13,7 @@ public class EditaDoadorRequest extends NovoDoadorRequest{
 
 	public Doador toModel(Doador doador, String placeId) {
 		Assert.notNull(placeId, "PlaceId não pode ser nulo");
-		return new Doador(getNome(), getContato(), getQuantidade(), getSemana(), getEndereco().toModel(placeId));
+		return new Doador(getNome(), getContato(), getQuantidade(), getSemana(), getEndereco().toModel(placeId), isAtivo());
 	}
 
 	public Long getId() {

@@ -55,7 +55,11 @@ public class GoogleClient {
 		ResponseEntity<GoogleGeocodeResponse> response = template.getForEntity(builder.toString(), GoogleGeocodeResponse.class);
 		Assert.notNull(response.getBody(), "Nenhum resultado encontrado para o endereco " + endereco);
 		Assert.notEmpty(response.getBody().getResults(), "Nenhum resultado encontrado para o endereco " + endereco);
-		Assert.isTrue(response.getBody().getResults().size() == 1, "Mais de um resultado encontrado para o endereco " + endereco + ", tente informar um endereço mais específico" );
+		if(response.getBody().getResults().size() > 1) {
+			System.out.println("Mais de um resultado encontrado para o endereco " + endereco + ", tente informar um endereço mais específico" );
+			return "";
+		}
+	//	Assert.isTrue(response.getBody().getResults().size() == 1, "Mais de um resultado encontrado para o endereco " + endereco + ", tente informar um endereço mais específico" );
 		
 		return response.getBody().getResults().get(0).getPlace_id();
 	}

@@ -35,14 +35,17 @@ public class Doador {
 	@Embedded
 	private Endereco endereco;
 	
+	private boolean ativo = true;
+	
 	@Deprecated
 	public Doador() {}
 
-	public Doador(String nome, String contato, Double quantidade, Integer semana, Endereco endereco) {
+	public Doador(String nome, String contato, Double quantidade, Integer semana, Endereco endereco, boolean ativo) {
 		this.nome = nome;
 		this.contato = contato;
 		this.quantidade = quantidade;
 		this.semana = semana;
+		this.ativo = ativo;
 		this.endereco = endereco;
 	}
 }

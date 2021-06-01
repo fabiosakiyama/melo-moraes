@@ -26,11 +26,13 @@ public class NovoDoadorRequest {
 	@Min(1)
 	private int semana;
 	
+	private boolean ativo;
+	
 	@NotNull
 	private NovoEnderecoRequest endereco;
 
 	public Doador toModel(String placeId) {
 		Assert.notNull(placeId, "PlaceId não pode ser nulo");
-		return new Doador(nome, contato, quantidade, semana, endereco.toModel(placeId));
+		return new Doador(nome, contato, quantidade, semana, endereco.toModel(placeId), ativo);
 	}
 }

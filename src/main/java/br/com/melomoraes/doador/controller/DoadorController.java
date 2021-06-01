@@ -67,9 +67,10 @@ public class DoadorController {
 	public ResponseEntity<List<DoadorResponse>> listaDoadores(
 			@RequestParam(required = false) String nome, 
 			@RequestParam(required = false) String bairro, 
-			@RequestParam(required = false) Integer semana) {
+			@RequestParam(required = false) Integer semana,
+			@RequestParam(required = false, defaultValue = "true") boolean ativo) {
 		Endereco endereco = new Endereco(null, bairro, null, null);
-		Doador doador = new Doador(nome, null, null, semana, endereco);                         
+		Doador doador = new Doador(nome, null, null, semana, endereco, ativo);                         
 		Example<Doador> example = Example.of(doador);
 		List<Doador> doadores = repository.findAll(example);
 		List<DoadorResponse> doadoresResponse = new ArrayList<>();
