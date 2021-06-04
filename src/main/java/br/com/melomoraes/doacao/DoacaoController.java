@@ -31,9 +31,8 @@ public class DoacaoController {
 	@GetMapping("/semana")
 	public ResponseEntity<?> doadoresDaSemana(
 			@RequestParam List<Integer> semanas, 
-			@RequestParam(required = false) List<Integer> semanasPS, 
-			@RequestParam List<String> bairros) {
-		List<Doador> doadoresDaSemana = doadorRepository.findBySemanaInAndEndereco_BairroIn(semanas, bairros);
+			@RequestParam List<String> areas) {
+		List<Doador> doadoresDaSemana = doadorRepository.findByAtivoAndSemanaInAndEndereco_AreaIn(true, semanas, areas);
 		if(doadoresDaSemana.size() > 25) {
 			return ResponseEntity.badRequest()
 					.body("Foram encontrados mais de 25 doadores com esses filtros, infelizmente a API do Google tem um limite de 25 rotas");
@@ -57,8 +56,6 @@ public class DoacaoController {
 		List<String> placesIdOrdenados = new ArrayList<>();
 		for(Integer index : gerarRotaOtimizada) {
 			String placeId = waypointsId.get(index);
-			long count = doadoresDaSemana.stream().filter(d -> d.getEndereco().getPlaceId().equalsIgnoreCase(placeId)).count();
-			Assert.isTrue(count == 1, "Erro filtrando um endereço pelo placeId " + placeId);
 			Doador doador = doadoresDaSemana.stream()
 					.filter(d -> d.getEndereco().getPlaceId().equalsIgnoreCase(placeId)).findFirst().get();
 			doadoresResponse.getRota().add(new DoadorResponse(doador));

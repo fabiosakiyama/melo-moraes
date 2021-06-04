@@ -84,7 +84,7 @@ public class ImportadorDeDoadoresPlanilhaService {
 			if(sheet.getSheetName().startsWith("_")) {
 				continue;
 			}
-			String area = sheet.getSheetName().split("-")[1].trim();
+			String area = sheet.getSheetName().trim();
 			rowIndex = 1;
 			Row row = sheet.getRow(rowIndex);
 			String nome = row.getCell(0).getStringCellValue();

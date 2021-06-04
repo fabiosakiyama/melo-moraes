@@ -26,7 +26,7 @@ public class NovoDoadorRequest {
 	@Min(1)
 	private int semana;
 	
-	private boolean ativo;
+	private Boolean ativo = true;
 	
 	@NotNull
 	private NovoEnderecoRequest endereco;

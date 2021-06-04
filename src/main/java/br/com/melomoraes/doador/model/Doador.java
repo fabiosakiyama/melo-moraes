@@ -15,30 +15,31 @@ import lombok.Getter;
 @Entity
 @Getter
 public class Doador {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	private String nome;
-	
+
 	private String contato;
-	
+
 	@Positive
 	private Double quantidade;
-	
+
 	@Max(4)
 	@Min(1)
 	private Integer semana;
-	
+
 	@Embedded
 	private Endereco endereco;
-	
+
 	private boolean ativo = true;
-	
+
 	@Deprecated
-	public Doador() {}
+	public Doador() {
+	}
 
 	public Doador(String nome, String contato, Double quantidade, Integer semana, Endereco endereco, boolean ativo) {
 		this.nome = nome;
@@ -47,5 +48,11 @@ public class Doador {
 		this.semana = semana;
 		this.ativo = ativo;
 		this.endereco = endereco;
+	}
+
+	public Doador(Long id, String nome, String contato, Double quantidade, Integer semana, Endereco endereco,
+			boolean ativo) {
+		this(nome, contato, quantidade, semana, endereco, ativo);
+		this.id = id;
 	}
 }

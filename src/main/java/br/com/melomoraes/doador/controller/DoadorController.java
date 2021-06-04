@@ -12,7 +12,9 @@ import javax.validation.Valid;
 import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,14 +55,21 @@ public class DoadorController {
 		repository.save(request.toModel(placeId));
 	}
 	
-	@PutMapping
-	public void editaDoador(@Valid @RequestBody EditaDoadorRequest request) {
-		Optional<Doador> possivelDoador = repository.findById(request.getId());
-		if(!possivelDoador.isPresent()) throw new IllegalArgumentException("Nenhum doador encontrado com o id " + request.getId());
+	@PutMapping("/{id}")
+	public void editaDoador(@PathVariable Long id, @Valid @RequestBody EditaDoadorRequest request) {
+		Optional<Doador> possivelDoador = repository.findById(id);
+		if(!possivelDoador.isPresent()) throw new IllegalArgumentException("Nenhum doador encontrado com o id " + id);
 		Doador doador = possivelDoador.get();
 		String novoPlaceId = googleClient.buscaPlaceIdDeUmEndereco(request.getEndereco().toGoogleString());
 		Assert.hasLength(novoPlaceId, "Não foi possível encontrar um placeId para o endereco " + request.getEndereco().toGoogleString());
-		repository.save(request.toModel(doador, novoPlaceId));
+		repository.save(request.toModel(id, doador, novoPlaceId));
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deletaDoador(@PathVariable Long id) {
+		Optional<Doador> possivelDoador = repository.findById(id);
+		if(!possivelDoador.isPresent()) throw new IllegalArgumentException("Nenhum doador encontrado com o id " + id);
+		repository.deleteById(id);
 	}
 	
 	@GetMapping

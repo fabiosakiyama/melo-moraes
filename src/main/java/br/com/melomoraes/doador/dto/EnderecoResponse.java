@@ -15,6 +15,8 @@ public class EnderecoResponse {
 	private String complemento;
 	
 	private String obs;
+	
+	private String area;
 
 	public EnderecoResponse(Endereco endereco) {
 		this.rua = endereco.getRua();
@@ -22,5 +24,6 @@ public class EnderecoResponse {
 		this.numero = endereco.getNumero();
 		this.complemento = endereco.getComplemento();
 		this.obs = endereco.getObs();
+		this.area = endereco.getArea();
 	}
 }

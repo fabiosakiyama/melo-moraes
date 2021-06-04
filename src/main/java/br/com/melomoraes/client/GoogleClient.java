@@ -59,7 +59,7 @@ public class GoogleClient {
 			System.out.println("Mais de um resultado encontrado para o endereco " + endereco + ", tente informar um endereço mais específico" );
 			return "";
 		}
-	//	Assert.isTrue(response.getBody().getResults().size() == 1, "Mais de um resultado encontrado para o endereco " + endereco + ", tente informar um endereço mais específico" );
+		Assert.isTrue(response.getBody().getResults().size() == 1, "Mais de um resultado encontrado para o endereco " + endereco + ", tente informar um endereço mais específico" );
 		
 		return response.getBody().getResults().get(0).getPlace_id();
 	}
