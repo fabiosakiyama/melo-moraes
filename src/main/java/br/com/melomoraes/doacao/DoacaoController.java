@@ -2,9 +2,13 @@ package br.com.melomoraes.doacao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.melomoraes.client.GoogleClient;
 import br.com.melomoraes.doador.dto.DoadorResponse;
 import br.com.melomoraes.doador.model.Doador;
+import br.com.melomoraes.doador.model.Endereco;
 import br.com.melomoraes.doador.repository.DoadorRepository;
 
 @RestController
@@ -22,6 +27,8 @@ public class DoacaoController {
 	private DoadorRepository doadorRepository;
 	
 	private GoogleClient client;
+	
+	private static Logger LOGGER = LoggerFactory.getLogger(DoacaoController.class);
 	
 	public DoacaoController(DoadorRepository doadorRepository, GoogleClient client) {
 		this.doadorRepository = doadorRepository;
@@ -97,6 +104,15 @@ public class DoacaoController {
 			doadoresResponse.getGoogleMapsUrls().add(client.getMapsUrl(placesIdOrdenados));
 		}
 		doadoresResponse.setNumeroDoadores(doadoresDaSemana.size());
+		if(!CollectionUtils.isEmpty(doadoresDaSemana)) {
+			try {
+				Set<Integer> semanas = doadoresDaSemana.stream().map(d -> d.getSemana()).collect(Collectors.toSet());
+				Endereco endereco = doadoresDaSemana.get(0).getEndereco();
+				LOGGER.info("Rota gerada para bairro " + endereco.getArea() + ", total de " + doadoresDaSemana.size() + " doadores para as semanas " + semanas);
+			} catch (Exception e) {
+				// nothing
+			}
+		}
 		return ResponseEntity.ok(doadoresResponse);
 	}
 }
