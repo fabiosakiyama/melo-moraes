@@ -41,8 +41,8 @@ public class DoacaoController {
 			@RequestParam List<String> areas) {
 		List<Doador> doadoresDaSemana = doadorRepository.findByAtivoAndSemanaInAndEndereco_AreaIn(true, semanas, areas);
 		if(doadoresDaSemana.size() > 25) {
-			return ResponseEntity.badRequest()
-					.body("Foram encontrados mais de 25 doadores com esses filtros, infelizmente a API do Google tem um limite de 25 rotas");
+		//	return ResponseEntity.badRequest()
+		//			.body("Foram encontrados mais de 25 doadores com esses filtros, infelizmente a API do Google tem um limite de 25 rotas");
 		}
 		List<DoadorResponse> response = new ArrayList<>();
 		doadoresDaSemana.forEach(d -> response.add(new DoadorResponse(d)));
