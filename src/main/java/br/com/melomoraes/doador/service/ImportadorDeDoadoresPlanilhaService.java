@@ -66,8 +66,8 @@ public class ImportadorDeDoadoresPlanilhaService {
 	
 	@PostConstruct
 	public void carregaDoadoresIniciais() throws IOException {
-		InputStream is = new FileInputStream("src/main/resources/carga-inicial-doadores.xlsx");
-		this.importaDoadoresViaPlanilha(is);
+		//InputStream is = new FileInputStream("src/main/resources/carga-inicial-doadores.xlsx");
+		//this.importaDoadoresViaPlanilha(is);
 	}
 	
 	public ImportadorDeDoadoresPlanilhaService(DoadorRepository repository, GoogleClient client) {

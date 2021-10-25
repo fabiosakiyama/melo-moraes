@@ -1,12 +1,24 @@
 spring:
     datasource:
-        password: 
-        url: jdbc:h2:mem:testdb
-        username: sa
-        driver-class-name: org.h2.Driver
+        platform: postgres
+        password: ${DBPASS}
+        url: ${DBURL}
+        username: ${DBUSER}
+        driver-class-name: org.postgresql.Driver
     jpa:
-        hibernate:
-            ddl-auto: update
+        properties:
+          hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+
+#spring:
+#    datasource:
+#        password: 
+#        url: jdbc:h2:mem:testdb
+#        username: sa
+#        driver-class-name: org.h2.Driver
+#    jpa:
+#        hibernate:
+#            ddl-auto: update
             
 google:
     key: ${GOOGLEKEY}
